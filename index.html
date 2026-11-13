@@ -42,24 +42,27 @@
 
   <!-- Шапка -->
   <header class="sticky top-0 z-30 border-b border-slate-800/80 bg-[#0b0e14]/90 backdrop-blur-md">
-    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-7 h-7 rounded-lg bg-indigo-600/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400 font-bold text-sm">
+    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-2">
+      <button onclick="switchTab('home')" class="flex items-center gap-3 text-left group">
+        <div class="w-7 h-7 rounded-lg bg-indigo-600/20 border border-indigo-500/40 group-hover:border-indigo-400 flex items-center justify-center text-indigo-400 font-bold text-sm transition">
           AA
         </div>
         <span class="font-semibold text-slate-100 tracking-tight">Anime Adventures <span class="text-slate-500 font-normal">DB</span></span>
-        <span class="hidden sm:inline-block text-[11px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700/60">Update 21</span>
-      </div>
+        <span class="hidden md:inline-block text-[11px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700/60">Update 21</span>
+      </button>
 
-      <nav class="flex items-center gap-1 bg-[#121620] p-1 rounded-lg border border-slate-800">
-        <button onclick="switchTab('tierlist')" id="tab-tierlist" class="px-3 py-1 rounded-md text-xs font-medium transition-colors bg-slate-800 text-white">
+      <nav class="flex items-center gap-1 bg-[#121620] p-1 rounded-lg border border-slate-800 overflow-x-auto">
+        <button onclick="switchTab('home')" id="tab-home" class="px-3 py-1 rounded-md text-xs font-medium transition-colors bg-slate-800 text-white whitespace-nowrap">
+          Главная
+        </button>
+        <button onclick="switchTab('tierlist')" id="tab-tierlist" class="px-3 py-1 rounded-md text-xs font-medium transition-colors text-slate-400 hover:text-slate-200 whitespace-nowrap">
           DPS Калькулятор
         </button>
-        <button onclick="switchTab('units')" id="tab-units" class="px-3 py-1 rounded-md text-xs font-medium transition-colors text-slate-400 hover:text-slate-200">
+        <button onclick="switchTab('units')" id="tab-units" class="px-3 py-1 rounded-md text-xs font-medium transition-colors text-slate-400 hover:text-slate-200 whitespace-nowrap">
           База юнитов
         </button>
-        <button onclick="switchTab('wiki')" id="tab-wiki" class="px-3 py-1 rounded-md text-xs font-medium transition-colors text-slate-400 hover:text-slate-200">
-          Справочник
+        <button onclick="switchTab('wiki')" id="tab-wiki" class="px-3 py-1 rounded-md text-xs font-medium transition-colors text-slate-400 hover:text-slate-200 whitespace-nowrap">
+          Трейты и механики
         </button>
       </nav>
     </div>
@@ -67,8 +70,75 @@
 
   <main class="max-w-6xl mx-auto px-4 py-6">
 
+    <!-- ВКЛАДКА 0: ГЛАВНОЕ МЕНЮ ПРИВЕТСТВИЯ -->
+    <section id="view-home" class="space-y-6">
+      <div class="bg-[#121620] border border-slate-800/90 rounded-2xl p-6 sm:p-8 space-y-6">
+        <div class="space-y-3 max-w-2xl">
+          <div class="inline-flex items-center gap-2 text-xs font-medium text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-2.5 py-1 rounded-full">
+            <span>Актуальная база данных · Update 21 (Heaven's Storm)</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-bold text-slate-100 tracking-tight">
+            База знаний и DPS-калькулятор Anime Adventures
+          </h1>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Интерактивный расчёт реального урона в секунду с учётом уровня 110, всех 18 трейтов, баффов саппортов (Orwin, Wendy, Oshy, Leafy, Kisuke) и синергий горения.
+          </p>
+        </div>
+
+        <!-- Быстрые кнопки навигации -->
+        <div class="flex flex-wrap items-center gap-3 pt-1">
+          <button onclick="switchTab('tierlist')" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-semibold transition flex items-center gap-2 shadow-lg shadow-indigo-950/50">
+            <span>Открыть DPS Калькулятор</span>
+            <span>→</span>
+          </button>
+          <button onclick="switchTab('units')" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs sm:text-sm font-medium border border-slate-700/80 transition">
+            Каталог юнитов (Update 21)
+          </button>
+          <button onclick="switchTab('wiki')" class="px-4 py-2.5 rounded-xl bg-[#0b0e14] hover:bg-slate-800/80 text-slate-300 text-xs sm:text-sm font-medium border border-slate-800 transition">
+            Таблица всех 18 трейтов
+          </button>
+        </div>
+      </div>
+
+      <!-- Карточки быстрого доступа -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div onclick="switchTab('tierlist')" class="bg-[#121620] border border-slate-800/90 hover:border-indigo-500/40 rounded-xl p-5 cursor-pointer transition space-y-2 group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-indigo-400 uppercase tracking-wider">Калькулятор</span>
+            <span class="text-slate-500 group-hover:text-indigo-400 transition">↗</span>
+          </div>
+          <h3 class="text-base font-semibold text-slate-100">Топ DPS с баффами</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Включай и выключай баффы саппортов, меняй трейты и сравнивай Average и Max DPS юнитов.
+          </p>
+        </div>
+
+        <div onclick="openModal('sky_god')" class="bg-[#121620] border border-slate-800/90 hover:border-amber-500/40 rounded-xl p-5 cursor-pointer transition space-y-2 group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-amber-400 uppercase tracking-wider">Лидер Update 21</span>
+            <span class="text-slate-500 group-hover:text-amber-400 transition">↗</span>
+          </div>
+          <h3 class="text-base font-semibold text-slate-100">Sky God (Rumble)</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Посмотреть подробные характеристики, стоимость прокачки и пассивку главного Secret-юнита патча.
+          </p>
+        </div>
+
+        <div onclick="switchTab('wiki')" class="bg-[#121620] border border-slate-800/90 hover:border-emerald-500/40 rounded-xl p-5 cursor-pointer transition space-y-2 group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Справочник</span>
+            <span class="text-slate-500 group-hover:text-emerald-400 transition">↗</span>
+          </div>
+          <h3 class="text-base font-semibold text-slate-100">Шансы и статы трейтов</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Полный список от Unique (0.1%) до Range I–III с точными процентами урона, SPA и дальности.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- ВКЛАДКА 1: DPS КАЛЬКУЛЯТОР -->
-    <section id="view-tierlist" class="space-y-4">
+    <section id="view-tierlist" class="hidden space-y-4">
       
       <!-- Панель настроек и баффов -->
       <div class="bg-[#121620] border border-slate-800/90 rounded-xl p-4 space-y-4">
@@ -165,7 +235,7 @@
   </main>
 
   <!-- Модальное окно юнита -->
-  <div id="unit-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 backdrop-blur-xs p-4" onclick="closeModal(event)">
+  <div id="unit-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 backdrop-blur-xs p-4" onclick="closeModal()">
     <div class="bg-[#121620] border border-slate-700/80 rounded-xl max-w-lg w-full p-5 space-y-4 shadow-2xl" onclick="event.stopPropagation()">
       <div class="flex items-start justify-between gap-4 border-b border-slate-800 pb-3">
         <div>
@@ -216,7 +286,6 @@
 
   <script>
     // 1. БАЗА ЮНИТОВ (UPDATE 21: HEAVEN'S STORM)
-    // Поля maxDmg и maxSpa соответствуют максимальному апгрейду в бою (Lvl 1)
     const UNITS_DATA = [
       {
         id: 'sky_god',
@@ -234,7 +303,7 @@
         totalCost: 68500,
         dotType: null,
         dotMultiplier: 0,
-        passive: 'Вызывает грозовые разряды по области; при наличии 4 Storm-юнитов в радиусе получает бонус к критическому урону молнии.'
+        passive: 'Вызывает грозовые разряды по области; при наличии 4 Storm-юнитов в радиусе получает бонус к урону молнии.'
       },
       {
         id: 'phoenix',
@@ -361,24 +430,6 @@
         dotType: null,
         dotMultiplier: 0,
         passive: 'Специализируется на воздушных целях и накладывает кратковременное оглушение.'
-      },
-      {
-        id: 'crush',
-        name: 'Crush (Ace)',
-        rarity: 'Mythic',
-        update: 'Update 21',
-        element: 'Air',
-        damageType: 'Physical',
-        attackType: 'Ground',
-        limit: 4,
-        maxDmg: 24500,
-        maxSpa: 6.8,
-        maxRange: 25,
-        deployCost: 1500,
-        totalCost: 45000,
-        dotType: null,
-        dotMultiplier: 0,
-        passive: 'Отбрасывает врагов назад при каждой третьей атаке.'
       }
     ];
 
@@ -406,17 +457,16 @@
 
     // 3. СОСТОЯНИЕ БАФФОВ И ФИЛЬТРОВ
     let state = {
-      dpsMode: 'avg', // 'avg' | 'max'
+      dpsMode: 'avg',
       trait: 'none',
       buffs: {
         lvl110: true,
-        orwin: 'x4',   // 'off' | 'x1' | 'x4' (только Physical)
-        wendy: 'x4',   // 'off' | 'x1' | 'x4' (только Magic)
-        oshy: true,    // +25% DMG всем
-        leafy: true,   // -15% SPA, +15% Range всем
-        kisuke: false, // +15% DMG всем
-        sakura: false, // +10% Range
-        phoenix: true  // +300% Burn DoT
+        orwin: 'x4',
+        wendy: 'x4',
+        oshy: true,
+        leafy: true,
+        kisuke: false,
+        phoenix: true
       },
       filters: {
         damageType: 'ALL',
@@ -424,7 +474,6 @@
       }
     };
 
-    // Инициализация интерфейса
     function init() {
       const traitSelect = document.getElementById('trait-select');
       TRAITS.forEach(t => {
@@ -452,7 +501,6 @@
       renderAll();
     }
 
-    // Отрисовка кнопок баффов
     function renderBuffs() {
       const container = document.getElementById('buffs-container');
       const items = [
@@ -578,21 +626,16 @@
       renderAll();
     }
 
-    // ФОРМУЛА РАСЧЕТА РЕАЛЬНОГО DPS
     function calculateUnitStats(unit) {
       const trait = TRAITS.find(t => t.id === state.trait) || TRAITS[0];
       const lvlMult = state.buffs.lvl110 ? 2.65 : 1.0;
-
-      // Лимит размещения (Unique режет до 1)
       const effectiveLimit = trait.singlePlacement ? 1 : unit.limit;
 
-      // Суммарный бонус к урону
       let dmgBonus = trait.dmg;
 
-      // Orwin баффает ТОЛЬКО Physical, Wendy баффает ТОЛЬКО Magic
       if (unit.damageType === 'Physical' && state.buffs.orwin !== 'off') {
         if (state.buffs.orwin === 'x4') {
-          dmgBonus += 1.00; // +100% постоянный цикл
+          dmgBonus += 1.00;
         } else {
           dmgBonus += state.dpsMode === 'max' ? 0.25 : (0.25 * 0.333);
         }
@@ -609,22 +652,17 @@
       if (state.buffs.oshy) dmgBonus += 0.25;
       if (state.buffs.kisuke) dmgBonus += 0.15;
 
-      // Расчет SPA
       let spaMult = 1 + trait.spa;
-      if (state.buffs.leafy) spaMult *= 0.85; // -15% SPA
+      if (state.buffs.leafy) spaMult *= 0.85;
       const effectiveSpa = Math.max(0.5, unit.maxSpa * spaMult);
 
-      // Итоговый урон за удар
       const hitDmg = unit.maxDmg * lvlMult * (1 + dmgBonus);
-
-      // Базовый DPS от прямых ударов
       let singleUnitDps = hitDmg / effectiveSpa;
 
-      // Учет DoT (Burn / Bleed)
       if (unit.dotType) {
         let dotBonus = unit.dotMultiplier;
         if (unit.dotType === 'Burn' && state.buffs.phoenix) {
-          dotBonus *= 4.0; // +300% к горению от Phoenix
+          dotBonus *= 4.0;
         }
         singleUnitDps += (hitDmg * dotBonus) / effectiveSpa;
       }
@@ -658,7 +696,6 @@
         calc: calculateUnitStats(u)
       })).sort((a, b) => b.calc.totalDps - a.calc.totalDps);
 
-      // Рендер рейтинга
       const list = document.getElementById('leaderboard-list');
       list.innerHTML = filtered.map((u, idx) => {
         const rarityStyle = u.rarity === 'Secret'
@@ -698,7 +735,6 @@
         `;
       }).join('');
 
-      // Рендер карточек в каталоге
       document.getElementById('units-count').textContent = `Показано: ${filtered.length}`;
       const grid = document.getElementById('units-grid');
       grid.innerHTML = filtered.map(u => `
@@ -720,17 +756,16 @@
       `).join('');
     }
 
-    // Переключение вкладок
     function switchTab(tab) {
-      ['tierlist', 'units', 'wiki'].forEach(t => {
+      ['home', 'tierlist', 'units', 'wiki'].forEach(t => {
         document.getElementById(`view-${t}`).classList.toggle('hidden', t !== tab);
         document.getElementById(`tab-${t}`).className = t === tab
-          ? 'px-3 py-1 rounded-md text-xs font-medium transition-colors bg-slate-800 text-white'
-          : 'px-3 py-1 rounded-md text-xs font-medium transition-colors text-slate-400 hover:text-slate-200';
+          ? 'px-3 py-1 rounded-md text-xs font-medium transition-colors bg-slate-800 text-white whitespace-nowrap'
+          : 'px-3 py-1 rounded-md text-xs font-medium transition-colors text-slate-400 hover:text-slate-200 whitespace-nowrap';
       });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Модальное окно
     function openModal(unitId) {
       const u = UNITS_DATA.find(x => x.id === unitId);
       if (!u) return;
